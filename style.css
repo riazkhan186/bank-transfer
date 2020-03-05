@@ -14,3 +14,39 @@ body{
     border-radius: 10px;
     box-shadow: 2px 2px 5px gray;
 }
+
+#transaction_area{
+   display: none;
+   font-weight: bold;
+}
+
+
+
+.deposit{
+    background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;  
+}
+
+.withdraw{
+    background-color: lightsalmon;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px; 
+}
+
+.balance{
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px; 
+}
+
+.transaction_form{
+    margin-top: 50px;
+}
+
+.form{
+    box-shadow: 2px 2px 5px gray;
+}
