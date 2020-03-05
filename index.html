@@ -22,6 +22,7 @@
 
         </div>
     </div>
+    
 
     <div id="transaction_area">
         
@@ -31,21 +32,21 @@
                 <div class="card"> 
                   <div class="card-body deposit">
                     <h5 class="card-title">Deposit</h5>
-                    <h2 class="card-text" id="d-amount">$ 00</h2>
+                    <h2 class="card-text"> $ <span id="d-amount">00</span> </h2>
                   </div>
                 
                 </div>
                 <div class="card"> 
                   <div class="card-body withdraw">
                     <h5 class="card-title">Withdraw</h5>
-                    <h2 class="card-text" id="w-amount">$ 00</h2>
+                    <h2 class="card-text" >$ <span id="w-amount">00</span> </h2>
                   </div>
                   
                 </div>
                 <div class="card">  
                   <div class="card-body balance">
                     <h5 class="card-title">Balance</h5>
-                    <h2 class="card-text" id="b-amount">$ 00</h2>
+                    <h2 class="card-text"> $ <span id="b-amount">00</span> </h2>
                   </div>
                 </div>
               </div>   
@@ -56,18 +57,18 @@
                 <div class="card form"> 
                   <div class="card-body ">
                     <h5 class="card-title">Deposit</h5>
-                    <input type="text" name="" id="" class="form-control" placeholder="$ amount you want to deposit">
+                    <input type="text" name="" id="d-added" class="form-control" placeholder="$ amount you want to deposit">
                     <br>
-                    <button class="btn btn-success">Deposit</button>
+                    <button class="btn btn-success" id="d-btn">Deposit</button>
                   </div>
                 
                 </div>
                 <div class="card form"> 
                   <div class="card-body ">
                     <h5 class="card-title">Withdraw</h5>
-                    <input type="text" name="" id="" class="form-control" placeholder="$ amount you want to withdraw">
+                    <input type="text" name="" id="w-added" class="form-control" placeholder="$ amount you want to withdraw">
                     <br>
-                    <button class="btn btn-success">Withdraw</button>
+                    <button class="btn btn-success" id="w-btn">Withdraw</button>
                   </div>
                   
                 </div>
@@ -80,14 +81,88 @@
 
 
     <script>
+
+        //login button event handler
         const loginBtn = document.getElementById("login");
         loginBtn.addEventListener("click", function(){
             const loginArea = document.getElementById("login_area");
             loginArea.style.display = "none";
-
+            
             const t = document.getElementById("transaction_area");
             t.style.display = "block";
         })
+
+        //deposit button event handler
+        
+        const depositBtn = document.getElementById("d-btn");
+        depositBtn.addEventListener("click", function(){
+            const depositAmount = document.getElementById("d-added").value;
+            const depositNumber = parseFloat(depositAmount);
+            
+            //for deposit
+            updateSpanText("d-amount", depositNumber);
+
+            //for balance
+           updateSpanText("b-amount", depositNumber);
+
+            //clear the input field
+            document.getElementById("d-added").value = "";
+        })
+
+        function updateSpanText(id, depositNumber){
+            const current =document.getElementById(id).innerText;
+            const currentNumber= parseFloat(current);
+            const total =currentNumber+depositNumber;
+            document.getElementById(id).innerText= total;
+
+        }
+
+        //withdraw button event handler
+        const withdrawBtn = document.getElementById("w-btn");
+        withdrawBtn.addEventListener("click", function(){
+            const withdrawAmount = document.getElementById("w-added").value;
+            const withdrawNumber = parseFloat(withdrawAmount);
+            
+            const bal=document.getElementById("b-amount").innerText;
+            const b=parseFloat(bal);
+
+        //for withdraw part
+        if(withdrawNumber > b){
+           // document.getElementById("w-amount").innerText= "Not enough money";
+            const w= document.getElementById("w-amount").innerText;
+            const cw=parseFloat(w);
+            document.getElementById("w-amount").value = cw;
+            
+        }
+        else{
+           
+           updateSpanText("w-amount",withdrawNumber);
+           
+        }
+          
+        //for balance part
+            withdraw("b-amount",withdrawNumber,"b-amount")
+
+        //clear the input field
+            document.getElementById("w-added").value = "";
+
+        })
+
+        function withdraw(id,withdrawNumber,id1){
+            const current =document.getElementById(id).innerText;
+            const currentNumber= parseFloat(current);
+            if(currentNumber < withdrawNumber)
+            {
+                document.getElementById(id1).innerText= 00;
+            }
+            
+            else{
+                const total =currentNumber-withdrawNumber;
+                document.getElementById(id1).innerText= total;
+            }
+            
+
+        }
 
     </script>
 
