@@ -98,15 +98,28 @@
         depositBtn.addEventListener("click", function(){
             const depositAmount = document.getElementById("d-added").value;
             const depositNumber = parseFloat(depositAmount);
-            
-            //for deposit
-            updateSpanText("d-amount", depositNumber);
+            if(depositNumber>0){
 
-            //for balance
-           updateSpanText("b-amount", depositNumber);
+              if(depositNumber<0){
+                alert("Deposit number can not be negative.");
+                }
+              else{
+                  //for deposit
+                  updateSpanText("d-amount", depositNumber);
 
-            //clear the input field
+                  //for balance
+                  updateSpanText("b-amount", depositNumber);
+
+                  //clear the input field
+                  
+                } 
+            }
+            else{
+              alert("Invalid amount.")
+            }
             document.getElementById("d-added").value = "";
+            
+            
         })
 
         function updateSpanText(id, depositNumber){
@@ -120,30 +133,31 @@
         //withdraw button event handler
         const withdrawBtn = document.getElementById("w-btn");
         withdrawBtn.addEventListener("click", function(){
+
             const withdrawAmount = document.getElementById("w-added").value;
             const withdrawNumber = parseFloat(withdrawAmount);
-            
-            const bal=document.getElementById("b-amount").innerText;
-            const b=parseFloat(bal);
+            if(withdrawNumber>0){
+                  const balance1=document.getElementById("b-amount").innerText;
+                  const b=parseFloat(balance1);
 
-        //for withdraw part
-        if(withdrawNumber > b){
-           // document.getElementById("w-amount").innerText= "Not enough money";
-            const w= document.getElementById("w-amount").innerText;
-            const cw=parseFloat(w);
-            document.getElementById("w-amount").value = cw;
-            
-        }
-        else{
-           
-           updateSpanText("w-amount",withdrawNumber);
-           
-        }
-          
-        //for balance part
-            withdraw("b-amount",withdrawNumber,"b-amount")
-
-        //clear the input field
+                //for withdraw part
+                if(withdrawNumber >b){
+                 alert("not enough money");
+                      
+                }
+                else{
+                  const w= document.getElementById("w-amount").innerText;
+                    const cw=parseFloat(w);
+                    document.getElementById("w-amount").value = cw;
+                    updateSpanText("w-amount",withdrawNumber);
+                    //for balance part
+                    withdraw("b-amount",withdrawNumber,"b-amount")  
+                }
+            }
+            else{
+              alert("Enter the amount you want to withdraw.")
+            }
+            //clear the input field
             document.getElementById("w-added").value = "";
 
         })
